@@ -1,0 +1,113 @@
+--
+-- For more information on build.settings see the Corona SDK Build Guide at:
+-- http://docs.coronalabs.com/guide/distribution/buildSettings/index.html
+--
+
+settings =
+{
+	
+	orientation =
+	{
+		-- Supported values for orientation:
+		-- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
+
+		default = "portrait",
+		supported = { "portrait", }
+	},
+
+	plugins =
+    {
+        ["CoronaProvider.native.popup.social"] =
+        {
+            publisherId = "com.coronalabs"
+        },
+        ["plugin.OneSignal"] =
+    	{
+        	publisherId = "com.onesignal",
+    	},
+    	["plugin.google.play.services"] =
+    	{
+            publisherId = "com.coronalabs",
+            supportedPlatforms = { android=true, ["android-kindle"]=true },
+    	},
+    	["plugin.google.iap.v3"] =
+        {
+            publisherId = "com.coronalabs",
+            supportedPlatforms = { android=true }
+        },
+    	
+    },
+	
+	excludeFiles =
+	{
+		-- Include only the necessary icon files on each platform
+		iphone = { "Icon-*dpi.png", },
+		android = { "Icon.png", "Icon-Small-*.png", "Icon*@2x.png", },
+	},
+
+	--
+	-- iOS Section
+	--
+	iphone =
+	{
+		plist =
+		{
+			UIStatusBarHidden = false,
+			UIPrerenderedIcon = true, -- set to false for "shine" overlay
+			--UIApplicationExitsOnSuspend = true, -- uncomment to quit app on suspend
+
+			CFBundleIconFiles =
+			{
+				"Icon.png",
+				"Icon@2x.png",
+				"Icon-60.png",
+				"Icon-60@2x.png",
+				"Icon-60@3x.png",
+				"Icon-72.png",
+				"Icon-72@2x.png",
+				"Icon-76.png",
+				"Icon-76@2x.png",
+				"Icon-Small.png",
+				"Icon-Small@2x.png",
+				"Icon-Small@3x.png",
+				"Icon-Small-40.png",
+				"Icon-Small-40@2x.png",
+				"Icon-Small-50.png",
+				"Icon-Small-50@2x.png",
+			},
+
+			--[[
+			-- iOS app URL schemes:
+			CFBundleURLTypes =
+			{
+				{
+					CFBundleURLSchemes =
+					{
+						"fbXXXXXXXXX",  -- replace XXXXXXXXX with your Facebook appId
+					}
+				}
+			}
+			--]]
+		}
+	},
+	
+	--
+	-- Android Section
+	--
+	android =
+	{
+		usesPermissions =
+		{
+			"com.android.vending.BILLING",
+			"android.permission.INTERNET",
+			"android.permission.ACCESS_NETWORK_STATE",
+			"android.permission.CAMERA",
+			"android.permission.WRITE_EXTERNAL_STORAGE",
+		},
+		usesFeatures =
+		{
+			{ name = "android.hardware.camera", required = false },
+			{ name = "android.hardware.camera.front", required = true },
+		},
+	},
+}
